@@ -1,20 +1,23 @@
 <?php
     include "koneksi.php";
 
-    $register_message = " ";
-
     if(isset($_POST["register"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
         $email = $_POST["email"];
 
-        $sql = "INSERT INTO pengguna (username, password, email) VALUES 
+        $sql = "INSERT INTO anggota (username, password, email) VALUES 
         ('$username', '$password', '$email')";
 
-        if($db->query($sql)) {
-            $register_message = "Daftar Akun Berhasil, Silahkan Login";
-        } else {
-            $register_message = "Daftar Akun Gagal, Silahkan Coba Lagi";
+        try {
+            if($db->query($sql)) {
+                echo '<script>alert("Daftar akun berhasil! Silahkan login.");
+                    location.href="login.php";</script>';
+            } else {
+                echo '<script>alert("Daftar akun gagal! Silahkan coba kembali.");</script>';
+            }
+        } catch(mysqli_sql_exception) {
+            echo '<script>alert("Email telah digunakan! Silahkan coba kembali.");</script>';
         }
     }  
 
