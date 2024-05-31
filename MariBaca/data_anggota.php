@@ -1,6 +1,6 @@
 <?php
   include "header.php";
-  $query=mysqli_query($db, "SELECT * FROM pengguna");
+  $query=mysqli_query($db, "SELECT * FROM anggota");
 ?>
 
 <div class="container">
@@ -22,6 +22,7 @@
                   <th>No</th>
                   <th>ID Anggota</th>
                   <th>Username</th>
+                  <th>Tanggal Bergabung</th>
                   <th>Email</th>
                   <?php
                     $no=1;
@@ -29,8 +30,9 @@
                         ?>
                 </tr>
                 <td><?php echo $no++ ?></td>
-                <td><?php echo $ambil_data['id_pengguna']; ?></td>
+                <td><?php echo $ambil_data['id_anggota']; ?></td>
                 <td><?php echo $ambil_data['username']; ?></td>
+                <td><?php echo $ambil_data['tgl_gabung']; ?></td>
                 <td><?php echo $ambil_data['email']; ?></td>
                <?php
                   }
