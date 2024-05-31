@@ -1,28 +1,24 @@
 <?php 
     include "koneksi.php";
 
-    $login_message = " ";
-
     if(isset($_POST['login'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $sql = "SELECT * FROM pengguna WHERE 
-        username ='$username' AND password='$password'
+        $sql = "SELECT * FROM anggota WHERE 
+        username='$username' AND password='$password'
         ";
 
         $result = $db->query($sql);
 
         if($result->num_rows > 0) {
-           $data = $result->fetch_assoc();
-           
-            header("location: template.php");
-
+            $data = $result->fetch_assoc();
+            echo '<script>alert("Selamat Datang, '.$data['username'].'");
+                location.href="template.php";</script>';
         } else {
-            $login_message = "Akun tidak ditemukan";
+            echo '<script>alert("Akun tidak ditemukan! Silahkan coba lagi.");</script>';
         }
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +35,6 @@
 
 <body>
     <div class="wrapper">
-        <i><?php $login_message ?></i>
         <form action="login.php" method="POST">
             <h1>Login</h1>
             <div class="input-box">
@@ -52,7 +47,7 @@
             </div>
             <button type="submit" name="login" class="btn">Login</button>
             <div class="register-link">
-                <p>Don't have an account? <a href="register.php">Register</a></p>
+                <p>Belum punya akun? <a href="register.php">Daftar</a></p>
             </div>
         </form>
     </div>
