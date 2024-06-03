@@ -22,7 +22,6 @@
                   <th>No</th>
                   <th>ID Anggota</th>
                   <th>Username</th>
-                  <th>Tanggal Bergabung</th>
                   <th>Email</th>
                   <?php
                     $no=1;
@@ -32,7 +31,6 @@
                 <td><?php echo $no++ ?></td>
                 <td><?php echo $ambil_data['id_anggota']; ?></td>
                 <td><?php echo $ambil_data['username']; ?></td>
-                <td><?php echo $ambil_data['tgl_gabung']; ?></td>
                 <td><?php echo $ambil_data['email']; ?></td>
                <?php
                   }

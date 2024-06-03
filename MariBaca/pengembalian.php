@@ -1,6 +1,7 @@
 <?php
+  include "koneksi.php";
   include "header.php";
-  $query=mysqli_query($db, "SELECT * FROM data_buku");
+  $query=mysqli_query($db, "SELECT * FROM pengembalian");
 ?>
 
 <div class="container">
@@ -13,7 +14,7 @@
         <div class="card-body">
           <div class="row">
              <div class="col-sm">
-                  Daftar berikut merupakan Buku yang belum kembali, tekan kotak merah pada tabel aksi
+                  Daftar berikut merupakan histori pengembalian yang telah dilakukan
              </div>
           </div>
           <div class="row mt-3">
@@ -24,19 +25,15 @@
                   <th>ID Pengembalian</th>
                   <th>ID Peminjaman</th>
                   <th>Tanggal Pengembalian</th>
-                  <th>Aksi</th>
-                  </tr>
                   <?php
                     $no=1;
                     while ($ambil_data=mysqli_fetch_array($query)) {
-                  ?>
+                      ?>
+                </tr>
                 <td><?php echo $no++ ?></td>
                 <td><?php echo $ambil_data['id_pengembalian']; ?></td>
                 <td><?php echo $ambil_data['id_peminjaman']; ?></td>
                 <td><?php echo $ambil_data['tgl_kembali']; ?></td>
-                <td>
-                  <a href="data_buku.php?id=<?php echo $ambil_data['id_buku'] ?>" class="btn btn-danger">Kembalikan</a>
-                </td>
                <?php
                   }
                ?>

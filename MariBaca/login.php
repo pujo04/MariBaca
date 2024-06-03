@@ -1,5 +1,6 @@
 <?php 
     include "koneksi.php";
+    session_start();
 
     if(isset($_POST['login'])) {
         $username = $_POST['username'];
@@ -13,7 +14,9 @@
 
         if($result->num_rows > 0) {
             $data = $result->fetch_assoc();
-            echo '<script>alert("Selamat Datang, '.$data['username'].'");
+            $_SESSION['id_anggota'] = $data['id_anggota'];
+            $_SESSION['username'] = $data['username'];
+            echo '<script>alert("Selamat Datang, '.$_SESSION['username'].'")
                 location.href="template.php";</script>';
         } else {
             echo '<script>alert("Akun tidak ditemukan! Silahkan coba lagi.");</script>';
@@ -42,7 +45,7 @@
                 <i class='bx bxs-user'></i>
             </div>
             <div class="input-box">
-                <input type="password" id="inputPass" placeholder="Password" name="password" required>
+                <input type="password" id="inputPass" placeholder="Password" name="password" requiredrequired>
                 <i class='bx bxs-lock-alt'></i>
             </div>
             <button type="submit" name="login" class="btn">Login</button>

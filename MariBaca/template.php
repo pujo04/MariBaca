@@ -1,3 +1,27 @@
+<?php
+  include "koneksi.php";
+  session_start();
+  if (!isset($_SESSION['id_anggota'])) {
+    header("Location: login.php");
+    exit();
+  }
+
+  $sql_anggota = "SELECT COUNT(id_anggota) FROM anggota";
+  $sql_buku = "SELECT COUNT(id_buku) FROM buku";
+  $sql_peminjaman = "SELECT COUNT(id_peminjaman) FROM peminjaman";
+  $sql_pengembalian = "SELECT COUNT(id_pengembalian) FROM pengembalian";
+
+  $result_anggota = ($db->query($sql_anggota))->fetch_assoc();
+  $result_buku = ($db->query($sql_buku))->fetch_assoc();
+  $result_peminjaman = ($db->query($sql_peminjaman))->fetch_assoc();
+  $result_pengembalian = ($db->query($sql_pengembalian))->fetch_assoc();
+
+  $data_anggota = $result_anggota['COUNT(id_anggota)'];
+  $data_buku = $result_buku['COUNT(id_buku)'];
+  $data_peminjaman = $result_peminjaman['COUNT(id_peminjaman)'];
+  $data_pengembalian = $result_pengembalian['COUNT(id_pengembalian)'];
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -64,7 +88,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Peminjaman</h5>
-              <p class="card-text">Jumlah transaksi peminjaman 5</p>
+              <p class="card-text">Jumlah transaksi peminjaman: <?= $data_peminjaman ?></p>
               <a href="peminjaman.php" class="btn btn-primary">Peminjaman</a>
             </div>
           </div>
@@ -73,7 +97,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Pengembalian</h5>
-              <p class="card-text">Jumlah transaksi pengembalian 5</p>
+              <p class="card-text">Jumlah transaksi pengembalian: <?= $data_pengembalian ?></p>
               <a href="pengembalian.php" class="btn btn-primary">Pengembalian</a>
             </div>
           </div>
@@ -82,7 +106,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Data Buku</h5>
-              <p class="card-text">Jumlah buku yang tersedia 5 buku</p>
+              <p class="card-text">Jumlah buku yang tersedia: <?= $data_buku ?></p>
               <a href="data_buku.php" class="btn btn-primary">Data Buku</a>
             </div>
           </div>
@@ -91,7 +115,7 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Data Anggota</h5>
-              <p class="card-text">Jumlah anggota yang ada 5 anggota</p>
+              <p class="card-text">Jumlah anggota yang ada: <?= $data_anggota ?></p>
               <a href="data_anggota.php" class="btn btn-primary">Anggota</a>
             </div>
           </div>
